@@ -32,7 +32,7 @@
 
 .btn {
     font-family: monospace;
-    font-weight: bold;
+    font-weight: 900;
     font-size: 20px;
     color: black;
     height: 50px;
@@ -55,4 +55,8 @@
 
 #clear-button {
     background-color: indianred;
+}
+
+.op-btn {
+    background-color: #696969;
 }
