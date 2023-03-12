@@ -133,28 +133,28 @@ document.querySelector("#clear-button").addEventListener("click", ()=> {
 // OPERATOR BUTTONS
 
 document.querySelector("#add-button").addEventListener("click", ()=> {
-    calculator.previousValue = calculator.currentDisplay;
+    if(!checkForOperator()) { calculator.previousValue = calculator.currentDisplay; }
     calculator.currentDisplay = "+";
     calculator.operator = "+";
     updateDisplay();
 });
 
 document.querySelector("#subtract-button").addEventListener("click", ()=> {
-    calculator.previousValue = calculator.currentDisplay;
+    if(!checkForOperator()) { calculator.previousValue = calculator.currentDisplay; }
     calculator.currentDisplay = "-";
     calculator.operator = "-";
     updateDisplay();
 }); 
 
 document.querySelector("#multiply-button").addEventListener("click", ()=> {
-    calculator.previousValue = calculator.currentDisplay;
+    if(!checkForOperator()) { calculator.previousValue = calculator.currentDisplay; }
     calculator.currentDisplay = "x";
     calculator.operator = "*";
     updateDisplay();
 }); 
 
 document.querySelector("#divide-button").addEventListener("click", ()=> {
-    calculator.previousValue = calculator.currentDisplay;
+    if(!checkForOperator()) { calculator.previousValue = calculator.currentDisplay; }
     calculator.currentDisplay = "÷";
     calculator.operator = "/";
     updateDisplay();
