@@ -1,6 +1,6 @@
 const calculator = {
     currentDisplay: "0",
-    workingValue: "",
+    previousValue: "",
     runningTotal: 0,
     operator: ""
 };
@@ -53,7 +53,7 @@ function operate() {
         case "/":
             value = divide(x, y);
     }
-
+    calculator.previousValue = value;
     calculator.runningTotal = value;
     calculator.currentDisplay = calculator.runningTotal;
     updateDisplay();
