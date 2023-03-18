@@ -220,6 +220,19 @@ function pressDecimal() {
     updateDisplay();
 }
 
+function clearEntry() {
+    // if there is a currentValue, remove the last character of the string
+    if(calculator.currentValue) {
+        calculator.currentValue = calculator.currentValue.slice(0, -1);
+        // check to see if this deleted the last character and if so, set the value to 0 so there isn't a blank screen on the display
+        if(!calculator.currentValue) {
+            calculator.currentValue = "0";
+        }
+    }
+
+    updateDisplay();
+}
+
 // Button Event Listeners
 
 // NUMBER BUTTONS
@@ -296,6 +309,10 @@ document.querySelector("#decimal-button").addEventListener("click", ()=> {
     pressDecimal();
 }); 
 
+document.querySelector("#ce-button").addEventListener("click", ()=> {
+    clearEntry();
+}); 
+
 // Key press eventListeners
 
 document.addEventListener("keydown", function(event) {
@@ -347,6 +364,9 @@ document.addEventListener("keydown", function(event) {
             break;
         case "NumpadEnter":
             pressEquals();
+            break;
+        case "Backspace":
+            clearEntry();
             break;
     }
 });

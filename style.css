@@ -36,7 +36,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto auto auto auto auto;
-    grid-gap: 5px;
+    grid-gap: 0px;
 }
 
 .btn {
@@ -61,7 +61,12 @@
 
 #clear-button {
     background-color: indianred;
-    grid-column: 1 / span 4;
+    grid-column: 1 / span 1;
+}
+
+#ce-button {
+    background-color: indianred;
+    grid-column: 2 / span 3;
 }
 
 #equals-button {
