@@ -56,6 +56,7 @@ body {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto auto auto auto auto;
     grid-gap: 0px;
+    justify-items: center;
 }
 
 .btn {
@@ -64,7 +65,7 @@ body {
     font-size: 20px;
     color: black;
     height: 50px;
-    width: 70px;
+    width: 80px;
     margin: 5px;
     border-radius: 7px;
     background-color: #E2DFD2;
@@ -82,11 +83,14 @@ body {
 #clear-button {
     background-color: indianred;
     grid-column: 1 / span 1;
+    grid-row: 1;
 }
 
 #ce-button {
     background-color: indianred;
     grid-column: 2 / span 3;
+    grid-row: 1;
+    margin-right: 205px;
 }
 
 #equals-button {
