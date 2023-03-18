@@ -52,7 +52,7 @@ function operate() {
         case "-":
             value = subtract(x, y);
             break;
-        case "x":
+        case "×":
             value = multiply(x, y);
             break;
         case "÷":
@@ -150,7 +150,7 @@ document.querySelector("#add-button").addEventListener("click", ()=> {
     if(!calculator.previousValue) {
         calculator.previousValue = calculator.currentValue;
         calculator.currentValue = "";
-    } else {
+    } else if(calculator.currentValue) {
         operate();
     }
     calculator.currentOperator = "+";
@@ -161,7 +161,7 @@ document.querySelector("#subtract-button").addEventListener("click", ()=> {
     if(!calculator.previousValue) {
         calculator.previousValue = calculator.currentValue;
         calculator.currentValue = "";
-    } else {
+    } else if(calculator.currentValue) {
         operate();
     }
     calculator.currentOperator = "-";
@@ -172,10 +172,10 @@ document.querySelector("#multiply-button").addEventListener("click", ()=> {
     if(!calculator.previousValue) {
         calculator.previousValue = calculator.currentValue;
         calculator.currentValue = "";
-    } else {
+    } else if(calculator.currentValue) {
         operate();
     }
-    calculator.currentOperator = "x";
+    calculator.currentOperator = "×";
     updateDisplay();
 }); 
 
@@ -183,7 +183,7 @@ document.querySelector("#divide-button").addEventListener("click", ()=> {
     if(!calculator.previousValue) {
         calculator.previousValue = calculator.currentValue;
         calculator.currentValue = "";
-    } else {
+    } else if(calculator.currentValue) {
         operate();
     }
     calculator.currentOperator = "÷";
