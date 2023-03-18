@@ -26,6 +26,8 @@
 
 #upper-display {
     font-size: 40px;
+    display: block;
+    height: 40px;
 }
 
 #btn-container {

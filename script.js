@@ -11,15 +11,14 @@ function checkZero() {
     } else return false;
 }
 
-// Old check for operator function - with new code, you shouldn't need this. any time you would run this you can simply do if(calculator.currentOperator)
-
-function checkForOperator() { 
-    if(calculator.currentDisplay === "+" ||
-       calculator.currentDisplay === "-" ||
-       calculator.currentDisplay === "x" ||
-       calculator.currentDisplay === "÷"    ) {
-            return true;
-    } else return false;
+// If the user tries to divide by zero, this function will trigger and universe as we know it will end
+function divideByZero() {
+    calculator.currentValue = "0";
+    calculator.previousValue = "";
+    calculator.currentOperator = "";
+    calculator.previousEvaluation = "";
+    updateDisplay();
+    alert("You can't divide by zero!");
 }
 
 function add(x, y) {
@@ -57,7 +56,9 @@ function operate() {
             value = multiply(x, y);
             break;
         case "÷":
-            value = divide(x, y);
+            if(!y) {
+                divideByZero();
+            } else value = divide(x, y);
     }
 // Set the result of this as currentValue
     calculator.currentValue = value.toString();
@@ -190,7 +191,7 @@ document.querySelector("#divide-button").addEventListener("click", ()=> {
 }); 
 
 document.querySelector("#equals-button").addEventListener("click", ()=> {
-    if(calculator.currentOperator) {
+    if(calculator.currentOperator && calculator.currentValue) {
         operate();
         updateDisplay();
     }
