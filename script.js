@@ -295,3 +295,58 @@ document.querySelector("#equals-button").addEventListener("click", ()=> {
 document.querySelector("#decimal-button").addEventListener("click", ()=> {
     pressDecimal();
 }); 
+
+// Key press eventListeners
+
+document.addEventListener("keydown", function(event) {
+    switch(event.code) {
+        case "Numpad1":
+            addOne();
+            break;
+        case "Numpad2":
+            addTwo();
+            break;
+        case "Numpad3":
+            addThree();
+            break;
+        case "Numpad4":
+            addFour();
+            break;
+        case "Numpad5":
+            addFive();
+            break;
+        case "Numpad6":
+            addSix();
+            break;
+        case "Numpad7":
+            addSeven();
+            break;
+        case "Numpad8":
+            addEight();
+            break;
+        case "Numpad9":
+            addNine();
+            break;
+        case "Numpad0":
+            addZero();
+            break;
+        case "NumpadDecimal":
+            pressDecimal();
+            break;
+        case "NumpadAdd":
+            pressAdd();
+            break;
+        case "NumpadSubtract":
+            pressSubtract();
+            break;
+        case "NumpadMultiply":
+            pressMultiply();
+            break;
+        case "NumpadDivide":
+            pressDivide();
+            break;
+        case "NumpadEnter":
+            pressEquals();
+            break;
+    }
+});
