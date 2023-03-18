@@ -215,3 +215,16 @@ document.querySelector("#equals-button").addEventListener("click", ()=> {
         updateDisplay();
     }
 }); 
+
+document.querySelector("#decimal-button").addEventListener("click", ()=> {
+    //check if there is no current value, if there isn't then set currentValue to "0."
+    if(!calculator.currentValue) {
+        calculator.currentValue = "0.";
+    //otherwise, check to see if there isn't already a decimal in the currentValue
+    //  if there is no decimal, add it to the end of currentValue
+    //  otherwise, do nothing
+    } else if(!calculator["currentValue"].includes(".")) {
+        calculator.currentValue += ".";
+    }
+    updateDisplay();
+}); 
