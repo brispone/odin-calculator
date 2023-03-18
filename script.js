@@ -13,12 +13,22 @@ function checkZero() {
 
 // If the user tries to divide by zero, this function will trigger and universe as we know it will end
 function divideByZero() {
+    alert("You can't divide by zero!");
+    resetCalculator();
+}
+
+// Checks if the current display string is within the maximum length for the screen (14 characters) and returns true if it is, false otherwise
+function checkDisplayLength() {
+    const displayLength = calculator["previousValue"].length + calculator["currentOperator"].length + calculator["currentValue"].length;
+    return (displayLength <= 14 ? true : false);
+}
+
+function resetCalculator() {
     calculator.currentValue = "0";
     calculator.previousValue = "";
     calculator.currentOperator = "";
     calculator.previousEvaluation = "";
     updateDisplay();
-    alert("You can't divide by zero!");
 }
 
 function add(x, y) {
@@ -72,6 +82,11 @@ function operate() {
 // Button Event Listeners
 
 function updateDisplay() {
+    if(!checkDisplayLength()) {
+        alert("You have reached the display limit!");
+        resetCalculator();
+    }
+
     const upperDisplay = document.querySelector("#upper-display");
     const lowerDisplay = document.querySelector("#lower-display");
     upperDisplay.innerText = calculator.previousEvaluation;
@@ -137,11 +152,7 @@ document.querySelector("#zero-button").addEventListener("click", ()=> {
 // CLEAR BUTTON
 
 document.querySelector("#clear-button").addEventListener("click", ()=> {
-    calculator.currentValue = "0";
-    calculator.previousValue = "";
-    calculator.currentOperator = "";
-    calculator.previousEvaluation = "";
-    updateDisplay();
+    resetCalculator();
 });
 
 // OPERATOR BUTTONS
