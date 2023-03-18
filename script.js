@@ -23,6 +23,19 @@ function checkDisplayLength() {
     return (displayLength <= 14 ? true : false);
 }
 
+function updateDisplay() {
+    if(!checkDisplayLength()) {
+        alert("You have reached the display limit!");
+        resetCalculator();
+    }
+
+    const upperDisplay = document.querySelector("#upper-display");
+    const lowerDisplay = document.querySelector("#lower-display");
+    upperDisplay.innerText = calculator.previousEvaluation;
+    lowerDisplay.innerText = calculator.previousValue + calculator.currentOperator + calculator.currentValue;
+}
+
+
 function resetCalculator() {
     calculator.currentValue = "0";
     calculator.previousValue = "";
@@ -79,74 +92,176 @@ function operate() {
     updateDisplay();
 }
 
-// Button Event Listeners
+// Button functions
 
-function updateDisplay() {
-    if(!checkDisplayLength()) {
-        alert("You have reached the display limit!");
-        resetCalculator();
-    }
-
-    const upperDisplay = document.querySelector("#upper-display");
-    const lowerDisplay = document.querySelector("#lower-display");
-    upperDisplay.innerText = calculator.previousEvaluation;
-    lowerDisplay.innerText = calculator.previousValue + calculator.currentOperator + calculator.currentValue;
-}
-
-// NUMBER BUTTONS
-
-document.querySelector("#one-button").addEventListener("click", ()=> {
+function addOne() {
     (checkZero()) ? calculator.currentValue = "1" : calculator.currentValue += "1";
     updateDisplay();
-});
+}
 
-document.querySelector("#two-button").addEventListener("click", ()=> {
+function addTwo() {
     (checkZero()) ? calculator.currentValue = "2" : calculator.currentValue += "2";
     updateDisplay();
-});
+}
 
-document.querySelector("#three-button").addEventListener("click", ()=> {
+function addThree() {
     (checkZero()) ? calculator.currentValue = "3" : calculator.currentValue += "3";
     updateDisplay();
-});
+}
 
-document.querySelector("#four-button").addEventListener("click", ()=> {
+function addFour() {
     (checkZero()) ? calculator.currentValue = "4" : calculator.currentValue += "4";
     updateDisplay();
-});
+}
 
-document.querySelector("#five-button").addEventListener("click", ()=> {
+function addFive() {
     (checkZero()) ? calculator.currentValue = "5" : calculator.currentValue += "5";
     updateDisplay();
-});
+}
 
-document.querySelector("#six-button").addEventListener("click", ()=> {
+function addSix() {
     (checkZero()) ? calculator.currentValue = "6" : calculator.currentValue += "6";
     updateDisplay();
-});
+}
 
-document.querySelector("#seven-button").addEventListener("click", ()=> {
+function addSeven() {
     (checkZero()) ? calculator.currentValue = "7" : calculator.currentValue += "7";
     updateDisplay();
-});
+}
 
-document.querySelector("#eight-button").addEventListener("click", ()=> {
+function addEight() {
     (checkZero()) ? calculator.currentValue = "8" : calculator.currentValue += "8";
     updateDisplay();
-});
+}
 
-document.querySelector("#nine-button").addEventListener("click", ()=> {
+function addNine() {
     (checkZero()) ? calculator.currentValue = "9" : calculator.currentValue += "9";
     updateDisplay();
-});
+}
 
-document.querySelector("#zero-button").addEventListener("click", ()=> {
+function addZero () {
     if(calculator.currentValue === "0") {
         return;
     } else {
         calculator.currentValue += "0";
         updateDisplay();
     }
+}
+
+function pressAdd() {
+    if(!calculator.previousValue) {
+        calculator.previousValue = calculator.currentValue;
+        calculator.currentValue = "";
+    } else if(calculator.currentValue) {
+        operate();
+        calculator.previousValue = calculator.currentValue;
+        calculator.currentValue = "";
+    }
+    calculator.currentOperator = "+";
+    updateDisplay();
+}
+
+function pressSubtract() {
+    if(!calculator.previousValue) {
+        calculator.previousValue = calculator.currentValue;
+        calculator.currentValue = "";
+    } else if(calculator.currentValue) {
+        operate();
+        calculator.previousValue = calculator.currentValue;
+        calculator.currentValue = "";
+    }
+    calculator.currentOperator = "-";
+    updateDisplay();
+}
+
+function pressMultiply() {
+    if(!calculator.previousValue) {
+        calculator.previousValue = calculator.currentValue;
+        calculator.currentValue = "";
+    } else if(calculator.currentValue) {
+        operate();
+        calculator.previousValue = calculator.currentValue;
+        calculator.currentValue = "";
+    }
+    calculator.currentOperator = "×";
+    updateDisplay();
+}
+
+function pressDivide() {
+    if(!calculator.previousValue) {
+        calculator.previousValue = calculator.currentValue;
+        calculator.currentValue = "";
+    } else if(calculator.currentValue) {
+        operate();
+        calculator.previousValue = calculator.currentValue;
+        calculator.currentValue = "";
+    }
+    calculator.currentOperator = "÷";
+    updateDisplay();
+}
+
+function pressEquals() {
+    if(calculator.currentOperator && calculator.currentValue) {
+        operate();
+        updateDisplay();
+    }
+}
+
+function pressDecimal() {
+    //check if there is no current value, if there isn't then set currentValue to "0."
+    if(!calculator.currentValue) {
+        calculator.currentValue = "0.";
+    //otherwise, check to see if there isn't already a decimal in the currentValue
+    //  if there is no decimal, add it to the end of currentValue
+    //  otherwise, do nothing
+    } else if(!calculator["currentValue"].includes(".")) {
+        calculator.currentValue += ".";
+    }
+    updateDisplay();
+}
+
+// Button Event Listeners
+
+// NUMBER BUTTONS
+
+document.querySelector("#one-button").addEventListener("click", ()=> {
+    addOne();
+});
+
+document.querySelector("#two-button").addEventListener("click", ()=> {
+    addTwo();
+});
+
+document.querySelector("#three-button").addEventListener("click", ()=> {
+    addThree();
+});
+
+document.querySelector("#four-button").addEventListener("click", ()=> {
+    addFour();
+});
+
+document.querySelector("#five-button").addEventListener("click", ()=> {
+    addFive();
+});
+
+document.querySelector("#six-button").addEventListener("click", ()=> {
+    addSix();
+});
+
+document.querySelector("#seven-button").addEventListener("click", ()=> {
+    addSeven();
+});
+
+document.querySelector("#eight-button").addEventListener("click", ()=> {
+    addEight();
+});
+
+document.querySelector("#nine-button").addEventListener("click", ()=> {
+    addNine();
+});
+
+document.querySelector("#zero-button").addEventListener("click", ()=> {
+    addZero();
 }); 
 
 // CLEAR BUTTON
@@ -158,73 +273,25 @@ document.querySelector("#clear-button").addEventListener("click", ()=> {
 // OPERATOR BUTTONS
 
 document.querySelector("#add-button").addEventListener("click", ()=> {
-    if(!calculator.previousValue) {
-        calculator.previousValue = calculator.currentValue;
-        calculator.currentValue = "";
-    } else if(calculator.currentValue) {
-        operate();
-        calculator.previousValue = calculator.currentValue;
-        calculator.currentValue = "";
-    }
-    calculator.currentOperator = "+";
-    updateDisplay();
+    pressAdd();
 });
 
 document.querySelector("#subtract-button").addEventListener("click", ()=> {
-    if(!calculator.previousValue) {
-        calculator.previousValue = calculator.currentValue;
-        calculator.currentValue = "";
-    } else if(calculator.currentValue) {
-        operate();
-        calculator.previousValue = calculator.currentValue;
-        calculator.currentValue = "";
-    }
-    calculator.currentOperator = "-";
-    updateDisplay();
+    pressSubtract();
 }); 
 
 document.querySelector("#multiply-button").addEventListener("click", ()=> {
-    if(!calculator.previousValue) {
-        calculator.previousValue = calculator.currentValue;
-        calculator.currentValue = "";
-    } else if(calculator.currentValue) {
-        operate();
-        calculator.previousValue = calculator.currentValue;
-        calculator.currentValue = "";
-    }
-    calculator.currentOperator = "×";
-    updateDisplay();
+    pressMultiply();
 }); 
 
 document.querySelector("#divide-button").addEventListener("click", ()=> {
-    if(!calculator.previousValue) {
-        calculator.previousValue = calculator.currentValue;
-        calculator.currentValue = "";
-    } else if(calculator.currentValue) {
-        operate();
-        calculator.previousValue = calculator.currentValue;
-        calculator.currentValue = "";
-    }
-    calculator.currentOperator = "÷";
-    updateDisplay();
+    pressDivide();
 }); 
 
 document.querySelector("#equals-button").addEventListener("click", ()=> {
-    if(calculator.currentOperator && calculator.currentValue) {
-        operate();
-        updateDisplay();
-    }
+    pressEquals();
 }); 
 
 document.querySelector("#decimal-button").addEventListener("click", ()=> {
-    //check if there is no current value, if there isn't then set currentValue to "0."
-    if(!calculator.currentValue) {
-        calculator.currentValue = "0.";
-    //otherwise, check to see if there isn't already a decimal in the currentValue
-    //  if there is no decimal, add it to the end of currentValue
-    //  otherwise, do nothing
-    } else if(!calculator["currentValue"].includes(".")) {
-        calculator.currentValue += ".";
-    }
-    updateDisplay();
+    pressDecimal();
 }); 
