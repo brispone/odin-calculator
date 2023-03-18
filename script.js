@@ -152,6 +152,8 @@ document.querySelector("#add-button").addEventListener("click", ()=> {
         calculator.currentValue = "";
     } else if(calculator.currentValue) {
         operate();
+        calculator.previousValue = calculator.currentValue;
+        calculator.currentValue = "";
     }
     calculator.currentOperator = "+";
     updateDisplay();
@@ -163,6 +165,8 @@ document.querySelector("#subtract-button").addEventListener("click", ()=> {
         calculator.currentValue = "";
     } else if(calculator.currentValue) {
         operate();
+        calculator.previousValue = calculator.currentValue;
+        calculator.currentValue = "";
     }
     calculator.currentOperator = "-";
     updateDisplay();
@@ -174,6 +178,8 @@ document.querySelector("#multiply-button").addEventListener("click", ()=> {
         calculator.currentValue = "";
     } else if(calculator.currentValue) {
         operate();
+        calculator.previousValue = calculator.currentValue;
+        calculator.currentValue = "";
     }
     calculator.currentOperator = "×";
     updateDisplay();
@@ -185,6 +191,8 @@ document.querySelector("#divide-button").addEventListener("click", ()=> {
         calculator.currentValue = "";
     } else if(calculator.currentValue) {
         operate();
+        calculator.previousValue = calculator.currentValue;
+        calculator.currentValue = "";
     }
     calculator.currentOperator = "÷";
     updateDisplay();
