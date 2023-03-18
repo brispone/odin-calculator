@@ -24,6 +24,10 @@
     box-shadow: inset 1px 1px 5px black;
 }
 
+#upper-display {
+    font-size: 40px;
+}
+
 #btn-container {
     width: 400px;
     overflow-y: auto;

@@ -1,17 +1,19 @@
 const calculator = {
-    currentDisplay: "0",
+    previousEvaluation: "",
+    currentValue: "0",
     previousValue: "",
-    runningTotal: 0,
-    operator: ""
+    currentOperator: ""
 };
 
 function checkZero() {
-    if(calculator.currentDisplay === "0") {
+    if(calculator.currentValue === "0") {
         return true;
     } else return false;
 }
 
-function checkForOperator() {
+// Old check for operator function - with new code, you shouldn't need this. any time you would run this you can simply do if(calculator.currentOperator)
+
+function checkForOperator() { 
     if(calculator.currentDisplay === "+" ||
        calculator.currentDisplay === "-" ||
        calculator.currentDisplay === "x" ||
@@ -37,130 +39,159 @@ function divide(x, y) {
 }
 
 function operate() {
-    let value = 0;
-    let x = parseFloat(calculator.previousValue);
-    let y = parseFloat(calculator.currentDisplay);
-    switch(calculator.operator) {
+
+// Set the previousEvaluation string
+    calculator.previousEvaluation = calculator.previousValue + calculator.currentOperator + calculator.currentValue + "=";
+// Take previousValue and currentValue and call the appropriate operation function (add, subtract, etc) according to the current operator
+    const x = parseFloat(calculator.previousValue);
+    const y = parseFloat(calculator.currentValue);
+    let value;
+    switch(calculator.currentOperator) {
         case "+":
             value = add(x, y);
             break;
         case "-":
             value = subtract(x, y);
             break;
-        case "*":
+        case "x":
             value = multiply(x, y);
             break;
-        case "/":
+        case "÷":
             value = divide(x, y);
     }
-    calculator.previousValue = value;
-    calculator.runningTotal = value;
-    calculator.currentDisplay = calculator.runningTotal;
+// Set the result of this as currentValue
+    calculator.currentValue = value.toString();
+// Reset previousValue to ""
+    calculator.previousValue = "";
+// Reset currentOperator to ""
+    calculator.currentOperator = "";
     updateDisplay();
 }
 
 // Button Event Listeners
 
 function updateDisplay() {
-    const display = document.querySelector("#calc-display");
-    display.innerText = calculator.currentDisplay;
+    const upperDisplay = document.querySelector("#upper-display");
+    const lowerDisplay = document.querySelector("#lower-display");
+    upperDisplay.innerText = calculator.previousEvaluation;
+    lowerDisplay.innerText = calculator.previousValue + calculator.currentOperator + calculator.currentValue;
 }
 
 // NUMBER BUTTONS
 
 document.querySelector("#one-button").addEventListener("click", ()=> {
-    (checkZero() || checkForOperator()) ? calculator.currentDisplay = "1" : calculator.currentDisplay += "1";
+    (checkZero()) ? calculator.currentValue = "1" : calculator.currentValue += "1";
     updateDisplay();
 });
 
 document.querySelector("#two-button").addEventListener("click", ()=> {
-    (checkZero() || checkForOperator()) ? calculator.currentDisplay = "2" : calculator.currentDisplay += "2";
+    (checkZero()) ? calculator.currentValue = "2" : calculator.currentValue += "2";
     updateDisplay();
 });
 
 document.querySelector("#three-button").addEventListener("click", ()=> {
-    (checkZero() || checkForOperator()) ? calculator.currentDisplay = "3" : calculator.currentDisplay += "3";
+    (checkZero()) ? calculator.currentValue = "3" : calculator.currentValue += "3";
     updateDisplay();
 });
 
 document.querySelector("#four-button").addEventListener("click", ()=> {
-    (checkZero() || checkForOperator()) ? calculator.currentDisplay = "4" : calculator.currentDisplay += "4";
+    (checkZero()) ? calculator.currentValue = "4" : calculator.currentValue += "4";
     updateDisplay();
 });
 
 document.querySelector("#five-button").addEventListener("click", ()=> {
-    (checkZero() || checkForOperator()) ? calculator.currentDisplay = "5" : calculator.currentDisplay += "5";
+    (checkZero()) ? calculator.currentValue = "5" : calculator.currentValue += "5";
     updateDisplay();
 });
 
 document.querySelector("#six-button").addEventListener("click", ()=> {
-    (checkZero() || checkForOperator()) ? calculator.currentDisplay = "6" : calculator.currentDisplay += "6";
+    (checkZero()) ? calculator.currentValue = "6" : calculator.currentValue += "6";
     updateDisplay();
 });
 
 document.querySelector("#seven-button").addEventListener("click", ()=> {
-    (checkZero() || checkForOperator()) ? calculator.currentDisplay = "7" : calculator.currentDisplay += "7";
+    (checkZero()) ? calculator.currentValue = "7" : calculator.currentValue += "7";
     updateDisplay();
 });
 
 document.querySelector("#eight-button").addEventListener("click", ()=> {
-    (checkZero() || checkForOperator()) ? calculator.currentDisplay = "8" : calculator.currentDisplay += "8";
+    (checkZero()) ? calculator.currentValue = "8" : calculator.currentValue += "8";
     updateDisplay();
 });
 
 document.querySelector("#nine-button").addEventListener("click", ()=> {
-    (checkZero() || checkForOperator()) ? calculator.currentDisplay = "9" : calculator.currentDisplay += "9";
+    (checkZero()) ? calculator.currentValue = "9" : calculator.currentValue += "9";
     updateDisplay();
 });
 
 document.querySelector("#zero-button").addEventListener("click", ()=> {
-    if(calculator.currentDisplay === "0") {
+    if(calculator.currentValue === "0") {
         return;
     } else {
-        checkForOperator() ? calculator.currentDisplay = "0" : calculator.currentDisplay += "0";
-    updateDisplay();
+        calculator.currentValue += "0";
+        updateDisplay();
     }
 }); 
 
 // CLEAR BUTTON
 
 document.querySelector("#clear-button").addEventListener("click", ()=> {
-    calculator.currentDisplay = "0";
-    calculator.runningTotal = 0;
+    calculator.currentValue = "0";
+    calculator.previousValue = "";
+    calculator.currentOperator = "";
+    calculator.previousEvaluation = "";
     updateDisplay();
 });
 
 // OPERATOR BUTTONS
 
 document.querySelector("#add-button").addEventListener("click", ()=> {
-    if(!checkForOperator()) { calculator.previousValue = calculator.currentDisplay; }
-    calculator.currentDisplay = "+";
-    calculator.operator = "+";
+    if(!calculator.previousValue) {
+        calculator.previousValue = calculator.currentValue;
+        calculator.currentValue = "";
+    } else {
+        operate();
+    }
+    calculator.currentOperator = "+";
     updateDisplay();
 });
 
 document.querySelector("#subtract-button").addEventListener("click", ()=> {
-    if(!checkForOperator()) { calculator.previousValue = calculator.currentDisplay; }
-    calculator.currentDisplay = "-";
-    calculator.operator = "-";
+    if(!calculator.previousValue) {
+        calculator.previousValue = calculator.currentValue;
+        calculator.currentValue = "";
+    } else {
+        operate();
+    }
+    calculator.currentOperator = "-";
     updateDisplay();
 }); 
 
 document.querySelector("#multiply-button").addEventListener("click", ()=> {
-    if(!checkForOperator()) { calculator.previousValue = calculator.currentDisplay; }
-    calculator.currentDisplay = "x";
-    calculator.operator = "*";
+    if(!calculator.previousValue) {
+        calculator.previousValue = calculator.currentValue;
+        calculator.currentValue = "";
+    } else {
+        operate();
+    }
+    calculator.currentOperator = "x";
     updateDisplay();
 }); 
 
 document.querySelector("#divide-button").addEventListener("click", ()=> {
-    if(!checkForOperator()) { calculator.previousValue = calculator.currentDisplay; }
-    calculator.currentDisplay = "÷";
-    calculator.operator = "/";
+    if(!calculator.previousValue) {
+        calculator.previousValue = calculator.currentValue;
+        calculator.currentValue = "";
+    } else {
+        operate();
+    }
+    calculator.currentOperator = "÷";
     updateDisplay();
 }); 
 
 document.querySelector("#equals-button").addEventListener("click", ()=> {
-    operate();
-    updateDisplay();
+    if(calculator.currentOperator) {
+        operate();
+        updateDisplay();
+    }
 }); 

@@ -3,7 +3,7 @@
 let currentValue = "0"
 let previousValue = "" (falsy)
 let currentOperator = ""
-let currentDisplayString (previousValue (if there is one) + currentOperator (if there is one) + currentValue)
+let currentDisplayString (previousValue (if there is one) + currentOperator (if there is one) + currentValue) (i think this calculation can be done in the update display func)
 let previousEvaluation (set this when you operate - should be previousValue + operator + currentValue = )
 
 
@@ -32,7 +32,7 @@ when operator is pressed ----->
 
 when equals is pressed ---->
     if currentOperator is falsy, don't do anything
-
+    otherwise, operate
 
 
 operate ---->
